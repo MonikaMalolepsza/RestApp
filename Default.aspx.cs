@@ -1,0 +1,24 @@
+﻿using RestApp.Controllers;
+using System;
+using System.Collections.Generic;
+using System.Linq;
+using System.Web;
+using System.Web.UI;
+using System.Web.UI.WebControls;
+
+namespace RestApp
+{
+    public partial class _Default : Page
+    {
+        protected void Page_Load(object sender, EventArgs e)
+        {
+            Controller Verwalter = new Controller();
+
+            Verwalter.GetApiTest();
+            Verwalter.GetApiTest(2);
+            Verwalter.PostApiTest();
+            Verwalter.PutApiTest();
+            Verwalter.DeleteApiTest(2);
+        }
+    }
+}
