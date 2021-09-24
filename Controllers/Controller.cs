@@ -42,7 +42,7 @@ namespace RestApp.Controllers
         public void DeleteApiTest(int id)
         {
             HttpClient client = new HttpClient();
-            string url = $"https://localhost:44395/api/Default/{id}";
+            string url = $"https://localhost:44395/api/Test/{id}";
 
             Task<HttpResponseMessage> response = client.DeleteAsync(url);
             try
@@ -51,7 +51,7 @@ namespace RestApp.Controllers
             }
             catch (Exception e)
             {
-                //Fehlermeldung
+                //Error
                 return;
             }
 
@@ -73,7 +73,7 @@ namespace RestApp.Controllers
         public void GetApiTest(int id)
         {
             HttpClient client = new HttpClient();
-            string url = $"https://localhost:44395/api/Default/{id}";
+            string url = $"https://localhost:44395/api/Test/{id}";
 
             Task<HttpResponseMessage> response = client.GetAsync(url);
             try
@@ -82,7 +82,7 @@ namespace RestApp.Controllers
             }
             catch (Exception e)
             {
-                //Fehlermeldung
+                //Error
                 return;
             }
 
@@ -101,11 +101,11 @@ namespace RestApp.Controllers
             string empfang = content.Result;
         }
 
-        public void PutApiTest()
+        public void PutApiTest(TestModelClass test)
         {
             HttpClient client = new HttpClient();
-            string url = "https://localhost:44395/api/Default/4";
-            var json = JsonConvert.SerializeObject(new TestModelClass(10, "Test10"));
+            string url = "https://localhost:44395/api/Test/4";
+            var json = JsonConvert.SerializeObject(test);
             Task<HttpResponseMessage> response = client.PutAsJsonAsync(url, json);
 
             try
@@ -114,7 +114,7 @@ namespace RestApp.Controllers
             }
             catch (Exception e)
             {
-                //Fehlermeldung
+                //Error
                 return;
             }
 
@@ -133,11 +133,11 @@ namespace RestApp.Controllers
             string empfang = content.Result;
         }
 
-        public void PostApiTest()
+        public void PostApiTest(TestModelClass test)
         {
             HttpClient client = new HttpClient();
-            string url = "https://localhost:44395/api/Default";
-            var json = JsonConvert.SerializeObject(new TestModelClass(10, "Test10"));
+            string url = "https://localhost:44395/api/Test";
+            var json = JsonConvert.SerializeObject(test);
             Task<HttpResponseMessage> response = client.PostAsJsonAsync(url, json);
 
             try
@@ -146,7 +146,7 @@ namespace RestApp.Controllers
             }
             catch (Exception e)
             {
-                //Fehlermeldung
+                //Error
                 return;
             }
 
@@ -168,20 +168,20 @@ namespace RestApp.Controllers
         public void GetApiTest()
         {
             HttpClient client = new HttpClient();
-            string url = "https://localhost:44395/api/Default";
+            string url = "https://localhost:44395/api/Test";
 
             Task<HttpResponseMessage> response = client.GetAsync(url);
 
             //Task<HttpResponseMessage> response = client.PostAsJsonAsync(url, json);
             //Task<HttpResponseMessage> response = client.PutAsJsonAsync(url, json);
-            //Task<HttpResponseMessage> response = client.DeleteAsync(); -> andere URL
+            //Task<HttpResponseMessage> response = client.DeleteAsync(); -> other URL
             try
             {
                 response.Wait();
             }
             catch (Exception e)
             {
-                //Fehlermeldung
+                //Error
                 return;
             }
 

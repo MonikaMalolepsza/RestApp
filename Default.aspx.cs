@@ -1,4 +1,5 @@
 ﻿using RestApp.Controllers;
+using RestApp.Models;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -12,13 +13,14 @@ namespace RestApp
     {
         protected void Page_Load(object sender, EventArgs e)
         {
-            Controller Verwalter = new Controller();
-
-            Verwalter.GetApiTest();
-            Verwalter.GetApiTest(2);
-            Verwalter.PostApiTest();
-            Verwalter.PutApiTest();
-            Verwalter.DeleteApiTest(2);
+            Controller c = new Controller();
+            
+            c.GetApiTest();
+            c.GetApiTest(2);
+            c.PostApiTest(new TestModelClass(1, "example"));
+            c.PutApiTest(new TestModelClass(2, "example2"));
+            c.DeleteApiTest(2);
+            
         }
     }
 }

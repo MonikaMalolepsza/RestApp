@@ -34,7 +34,7 @@ namespace RestApp.Models
         }
         #endregion
         #region Methods
-        public void Kopieren(TestModelClass tmc)
+        public void Copy(TestModelClass tmc)
         {
             Id = tmc.Id;
             Name = tmc.Name;

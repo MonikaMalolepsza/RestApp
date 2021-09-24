@@ -9,7 +9,7 @@ using System.Web.Http;
 
 namespace RestApp.Controllers
 {
-    public class DefaultController : ApiController
+    public class TestController : ApiController
     {
         // GET: api/Default
         public string Get()
@@ -40,7 +40,7 @@ namespace RestApp.Controllers
             Controller c = new Controller();
             if (c.DataList.Where(x => x.Id == tmc.Id).ToList().Count == 1)
             {
-                c.DataList.First(x => x.Id == tmc.Id).Kopieren(tmc);
+                c.DataList.First(x => x.Id == tmc.Id).Copy(tmc);
             }
             else
             {
