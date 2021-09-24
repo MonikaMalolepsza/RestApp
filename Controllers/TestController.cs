@@ -26,16 +26,22 @@ namespace RestApp.Controllers
         }
 
         // POST: api/Default
-        public void Post([FromBody] string value)
+        public IHttpActionResult Post([FromBody] string value)
         {
+            if (!ModelState.IsValid)
+                return BadRequest("Invalid data.");
             TestModelClass tmc = JsonConvert.DeserializeObject<TestModelClass>(value);
             Controller c = new Controller();
             c.DataList.Add(tmc);
+            return Ok();
+
         }
 
         // PUT: api/Default/5
-        public void Put(int id, [FromBody] string value)
+        public IHttpActionResult Put(int id, [FromBody] string value)
         {
+            if (!ModelState.IsValid)
+                return BadRequest("Invalid data.");
             TestModelClass tmc = JsonConvert.DeserializeObject<TestModelClass>(value);
             Controller c = new Controller();
             if (c.DataList.Where(x => x.Id == tmc.Id).ToList().Count == 1)
@@ -46,13 +52,17 @@ namespace RestApp.Controllers
             {
                 c.DataList.Add(tmc);
             }
+            return Ok();
         }
 
         // DELETE: api/Default/5
-        public void Delete(int id)
+        public IHttpActionResult Delete(int id)
         {
             Controller c = new Controller();
             c.DataList.RemoveAll(x => x.Id == id);
+            return Ok();
+
         }
+
     }
 }

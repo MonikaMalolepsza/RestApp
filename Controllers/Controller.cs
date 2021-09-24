@@ -3,6 +3,7 @@ using RestApp.Models;
 using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Net;
 using System.Net.Http;
 using System.Threading.Tasks;
 using System.Web;
@@ -52,7 +53,7 @@ namespace RestApp.Controllers
             catch (Exception e)
             {
                 //Error
-                return;
+                throw e;
             }
 
             HttpResponseMessage result = response.Result;
@@ -64,17 +65,17 @@ namespace RestApp.Controllers
             }
             catch (Exception e)
             {
-                return;
+                throw e;
             }
 
-            string empfang = content.Result;
+            string final = content.Result;
         }
 
         public void GetApiTest(int id)
         {
             HttpClient client = new HttpClient();
             string url = $"https://localhost:44395/api/Test/{id}";
-
+            
             Task<HttpResponseMessage> response = client.GetAsync(url);
             try
             {
@@ -83,7 +84,7 @@ namespace RestApp.Controllers
             catch (Exception e)
             {
                 //Error
-                return;
+                throw e;
             }
 
             HttpResponseMessage result = response.Result;
@@ -95,10 +96,10 @@ namespace RestApp.Controllers
             }
             catch (Exception e)
             {
-                return;
+                throw e;
             }
 
-            string empfang = content.Result;
+            string final = content.Result;
         }
 
         public void PutApiTest(TestModelClass test)
@@ -115,22 +116,9 @@ namespace RestApp.Controllers
             catch (Exception e)
             {
                 //Error
-                return;
+                throw e;
             }
 
-            HttpResponseMessage result = response.Result;
-            Task<string> content = result.Content.ReadAsStringAsync();
-
-            try
-            {
-                content.Wait();
-            }
-            catch (Exception e)
-            {
-                return;
-            }
-
-            string empfang = content.Result;
         }
 
         public void PostApiTest(TestModelClass test)
@@ -147,22 +135,9 @@ namespace RestApp.Controllers
             catch (Exception e)
             {
                 //Error
-                return;
+                throw e;
             }
 
-            HttpResponseMessage result = response.Result;
-            Task<string> content = result.Content.ReadAsStringAsync();
-
-            try
-            {
-                content.Wait();
-            }
-            catch (Exception e)
-            {
-                return;
-            }
-
-            string empfang = content.Result;
         }
 
         public void GetApiTest()
@@ -171,10 +146,6 @@ namespace RestApp.Controllers
             string url = "https://localhost:44395/api/Test";
 
             Task<HttpResponseMessage> response = client.GetAsync(url);
-
-            //Task<HttpResponseMessage> response = client.PostAsJsonAsync(url, json);
-            //Task<HttpResponseMessage> response = client.PutAsJsonAsync(url, json);
-            //Task<HttpResponseMessage> response = client.DeleteAsync(); -> other URL
             try
             {
                 response.Wait();
@@ -182,7 +153,7 @@ namespace RestApp.Controllers
             catch (Exception e)
             {
                 //Error
-                return;
+                throw e;
             }
 
             HttpResponseMessage result = response.Result;
@@ -194,10 +165,11 @@ namespace RestApp.Controllers
             }
             catch (Exception e)
             {
-                return;
+                throw e;
             }
 
-            string empfang = content.Result;
+            string final = content.Result;
+
         }
 
         #endregion Methods
