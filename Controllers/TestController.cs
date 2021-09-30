@@ -59,9 +59,15 @@ namespace RestApp.Controllers
         public IHttpActionResult Delete(int id)
         {
             Controller c = new Controller();
-            c.DataList.RemoveAll(x => x.Id == id);
-            return Ok();
-
+            if (c.DataList.Exists(x => x.Id == id))
+            {
+                c.DataList.RemoveAll(x => x.Id == id);
+                return Ok();
+            }
+            else
+            {
+                return BadRequest("Invalid Id");
+            }
         }
 
     }
