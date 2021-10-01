@@ -22,6 +22,12 @@ namespace RestApp.Models
             Id = 0;
             Name = "";
         }
+        public TestModelClass(string name)
+        {
+            var rand = new Random();
+            Id = rand.Next();
+            Name = name;
+        }
         public TestModelClass(int id, string name)
         {
             Id = id;
