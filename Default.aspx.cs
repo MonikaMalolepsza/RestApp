@@ -11,13 +11,11 @@ namespace RestApp
 {
     public partial class _Default : Page
     {
-        private Controller _c;
 
-        public Controller c { get => _c; set => _c = value; }
+        Controller c = new Controller();
 
         protected void Page_Load(object sender, EventArgs e)
         {
-            Controller c = new Controller();
             tbl1.DataSource = c.DataList;
             List<TestModelClass> l1 = new List<TestModelClass>();
             l1.Add(c.TestModelClass);
