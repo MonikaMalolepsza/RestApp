@@ -15,7 +15,6 @@ namespace RestAnwendung.Controllers
         public BackendController()
         {
             DataList = new List<TestModelClass>();
-
             DataList.Add(new TestModelClass(1, "Test1"));
             DataList.Add(new TestModelClass(2, "Test2"));
             DataList.Add(new TestModelClass(3, "Test3"));

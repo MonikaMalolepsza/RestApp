@@ -33,11 +33,6 @@ namespace RestApp.Models
             Id = id;
             Name = name;
         }
-        public TestModelClass(TestModelClass tmc)
-        {
-            Id = tmc.Id;
-            Name = tmc.Name;
-        }
         #endregion
         #region Methods
         public void Copy(TestModelClass tmc)

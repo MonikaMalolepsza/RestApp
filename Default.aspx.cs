@@ -16,6 +16,7 @@ namespace RestApp
 
         protected void Page_Load(object sender, EventArgs e)
         {
+
             tbl1.DataSource = c.DataList;
             List<TestModelClass> l1 = new List<TestModelClass>();
             l1.Add(c.TestModelClass);

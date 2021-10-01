@@ -13,12 +13,13 @@ namespace RestApp.Controllers
     public class TestController : ApiController
     {
         BackendController bc = new BackendController();
-
-
+        
         // GET: api/Test
-        public string Get()
+        public List<TestModelClass> Get()
         {
-            return JsonConvert.SerializeObject(bc.DataList);
+            List<TestModelClass> neu = new List<TestModelClass>();
+            neu.Add(new TestModelClass(1, "Test"));
+            return neu;
         }
 
         // GET: api/Test/5
