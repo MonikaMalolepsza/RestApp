@@ -12,20 +12,20 @@ namespace RestApp.Controllers
 {
     public class TestController : ApiController
     {
-        BackendController bc = new BackendController();
-        
+        private BackendController bc = new BackendController();
+
         // GET: api/Test
         public List<TestModelClass> Get()
         {
-            List<TestModelClass> neu = new List<TestModelClass>();
-            neu.Add(new TestModelClass(1, "Test"));
-            return neu;
+            //List<TestModelClass> neu = new List<TestModelClass>();
+            //neu.Add(new TestModelClass(1, "Test"));
+            return bc.DataList;
         }
 
         // GET: api/Test/5
-        public string Get(int id)
+        public TestModelClass Get(int id)
         {
-            return JsonConvert.SerializeObject(bc.DataList.FirstOrDefault(x => x.Id == id));
+            return bc.DataList.FirstOrDefault(x => x.Id == id);
         }
 
         // POST: api/Test
@@ -36,7 +36,6 @@ namespace RestApp.Controllers
             TestModelClass tmc = JsonConvert.DeserializeObject<TestModelClass>(value);
             bc.DataList.Add(tmc);
             return Ok();
-
         }
 
         // PUT: api/Test/5
@@ -69,6 +68,5 @@ namespace RestApp.Controllers
                 return BadRequest("Invalid Id");
             }
         }
-
     }
 }

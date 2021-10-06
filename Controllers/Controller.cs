@@ -193,9 +193,9 @@ namespace RestApp.Controllers
             }
 
             string final = content.Result;
-            List<TestModelClass> temp = JsonConvert.DeserializeObject<List<TestModelClass>>(final);
+        //    List<TestModelClass> temp = JsonConvert.DeserializeObject<List<TestModelClass>>(final);
                 
-                //DeserializeObject<List<TestModelClass>>(final);
+              DataList=JsonConvert.DeserializeObject<List<TestModelClass>>(final);
 
         }
 
