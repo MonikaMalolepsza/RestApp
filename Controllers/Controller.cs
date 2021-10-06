@@ -15,12 +15,16 @@ namespace RestApp.Controllers
         #region Attributes
 
         private List<TestModelClass> _dataList;
+        private TestModelClass _testModelClass;
+        private string _status;
 
         #endregion Attributes
 
         #region Properties
 
         public List<TestModelClass> DataList { get => _dataList; set => _dataList = value; }
+        public TestModelClass TestModelClass { get => _testModelClass; set => _testModelClass = value; }
+        public string Status { get => _status; set => _status = value; }
 
         #endregion Properties
 
@@ -29,11 +33,7 @@ namespace RestApp.Controllers
         public Controller()
         {
             DataList = new List<TestModelClass>();
-            DataList.Add(new TestModelClass(1, "Test1"));
-            DataList.Add(new TestModelClass(2, "Test2"));
-            DataList.Add(new TestModelClass(3, "Test3"));
-            DataList.Add(new TestModelClass(4, "Test4"));
-            DataList.Add(new TestModelClass(5, "Test5"));
+            TestModelClass = new TestModelClass();
         }
 
         #endregion Constructors
@@ -55,7 +55,6 @@ namespace RestApp.Controllers
                 //Error
                 throw e;
             }
-
             HttpResponseMessage result = response.Result;
             Task<string> content = result.Content.ReadAsStringAsync();
 
@@ -68,7 +67,7 @@ namespace RestApp.Controllers
                 throw e;
             }
 
-            string final = content.Result;
+            Status = content.Result;
         }
 
         public void GetApiTest(int id)
@@ -100,6 +99,7 @@ namespace RestApp.Controllers
             }
 
             string final = content.Result;
+            TestModelClass = JsonConvert.DeserializeObject<TestModelClass>(final);
         }
 
         public void PutApiTest(TestModelClass test)
@@ -118,7 +118,19 @@ namespace RestApp.Controllers
                 //Error
                 throw e;
             }
+            HttpResponseMessage result = response.Result;
+            Task<string> content = result.Content.ReadAsStringAsync();
 
+            try
+            {
+                content.Wait();
+            }
+            catch (Exception e)
+            {
+                throw e;
+            }
+
+            Status = content.Result;
         }
 
         public void PostApiTest(TestModelClass test)
@@ -137,7 +149,19 @@ namespace RestApp.Controllers
                 //Error
                 throw e;
             }
+            HttpResponseMessage result = response.Result;
+            Task<string> content = result.Content.ReadAsStringAsync();
 
+            try
+            {
+                content.Wait();
+            }
+            catch (Exception e)
+            {
+                throw e;
+            }
+
+            Status = content.Result;
         }
 
         public void GetApiTest()
@@ -169,6 +193,9 @@ namespace RestApp.Controllers
             }
 
             string final = content.Result;
+        //    List<TestModelClass> temp = JsonConvert.DeserializeObject<List<TestModelClass>>(final);
+                
+              DataList=JsonConvert.DeserializeObject<List<TestModelClass>>(final);
 
         }
 

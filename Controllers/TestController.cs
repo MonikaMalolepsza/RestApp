@@ -1,4 +1,5 @@
 ﻿using Newtonsoft.Json;
+using RestAnwendung.Controllers;
 using RestApp.Models;
 using System;
 using System.Collections.Generic;
@@ -11,57 +12,55 @@ namespace RestApp.Controllers
 {
     public class TestController : ApiController
     {
-        // GET: api/Default
-        public string Get()
+        private BackendController bc = new BackendController();
+
+        // GET: api/Test
+        public List<TestModelClass> Get()
         {
-            Controller c = new Controller();
-            return JsonConvert.SerializeObject(c.DataList);
+            //List<TestModelClass> neu = new List<TestModelClass>();
+            //neu.Add(new TestModelClass(1, "Test"));
+            return bc.DataList;
         }
 
-        // GET: api/Default/5
-        public string Get(int id)
+        // GET: api/Test/5
+        public TestModelClass Get(int id)
         {
-            Controller c = new Controller();
-            return JsonConvert.SerializeObject(c.DataList.FirstOrDefault(x => x.Id == id));
+            return bc.DataList.FirstOrDefault(x => x.Id == id);
         }
 
-        // POST: api/Default
+        // POST: api/Test
         public IHttpActionResult Post([FromBody] string value)
         {
             if (!ModelState.IsValid)
                 return BadRequest("Invalid data.");
             TestModelClass tmc = JsonConvert.DeserializeObject<TestModelClass>(value);
-            Controller c = new Controller();
-            c.DataList.Add(tmc);
+            bc.DataList.Add(tmc);
             return Ok();
-
         }
 
-        // PUT: api/Default/5
+        // PUT: api/Test/5
         public IHttpActionResult Put(int id, [FromBody] string value)
         {
             if (!ModelState.IsValid)
                 return BadRequest("Invalid data.");
             TestModelClass tmc = JsonConvert.DeserializeObject<TestModelClass>(value);
-            Controller c = new Controller();
-            if (c.DataList.Where(x => x.Id == tmc.Id).ToList().Count == 1)
+            if (bc.DataList.Where(x => x.Id == tmc.Id).ToList().Count == 1)
             {
-                c.DataList.First(x => x.Id == tmc.Id).Copy(tmc);
+                bc.DataList.First(x => x.Id == tmc.Id).Copy(tmc);
             }
             else
             {
-                c.DataList.Add(tmc);
+                bc.DataList.Add(tmc);
             }
             return Ok();
         }
 
-        // DELETE: api/Default/5
+        // DELETE: api/Test/5
         public IHttpActionResult Delete(int id)
         {
-            Controller c = new Controller();
-            if (c.DataList.Exists(x => x.Id == id))
+            if (bc.DataList.Exists(x => x.Id == id))
             {
-                c.DataList.RemoveAll(x => x.Id == id);
+                bc.DataList.RemoveAll(x => x.Id == id);
                 return Ok();
             }
             else
@@ -69,6 +68,5 @@ namespace RestApp.Controllers
                 return BadRequest("Invalid Id");
             }
         }
-
     }
 }
