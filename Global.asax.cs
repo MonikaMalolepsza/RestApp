@@ -14,10 +14,12 @@ namespace RestApp
     public class Global : HttpApplication
     {
         public static Controller Controller { get; set; }
-
+        public static BackendController ControllerB { get; set; }
         private void Application_Start(object sender, EventArgs e)
         {
             Controller = new Controller();
+            ControllerB = new BackendController();
+
             // Code, der beim Anwendungsstart ausgeführt wird
             GlobalConfiguration.Configure(WebApiConfig.Register);
             RouteConfig.RegisterRoutes(RouteTable.Routes);

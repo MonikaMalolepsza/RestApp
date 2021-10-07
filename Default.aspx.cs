@@ -50,28 +50,43 @@ namespace RestApp
 
         protected void RunPut(object sender, EventArgs e)
         {
-            if (textIdField.Text != "") c.PutApiTest(new TestModelClass(Convert.ToInt32(textIdField.Text), textEdit.Text));
+            if (textId.Text != "") c.PutApiTest(new TestModelClass(Convert.ToInt32(textId.Text), textEdit.Text));
             else c.PutApiTest(new TestModelClass(textEdit.Text));
+            ShowStatus();
+
         }
 
         protected void RunPost(object sender, EventArgs e)
         {
             TestModelClass modelClass = new TestModelClass();
             c.PostApiTest(new TestModelClass(textEdit.Text));
+            ShowStatus();
         }
 
         protected void RunDelete(object sender, EventArgs e)
         {
+            c.DeleteApiTest(Convert.ToInt32(textId.Text));
+            ShowStatus();
         }
 
         protected void Clear(object sender, EventArgs e)
         {
             textId.Text = "";
             textEdit.Text = "";
+            textIdField.Text = "";
             tbl1.DataSource = new List<TestModelClass>();
             tbl2.DataSource = new List<TestModelClass>();
             tbl1.DataBind();
             tbl2.DataBind();
+        }
+
+        private void ShowStatus()
+        {
+            if (c.Status != null)
+            {
+                textIdField.Text = c.Status;
+                textIdField.Visible = true;
+            }
         }
     }
 }

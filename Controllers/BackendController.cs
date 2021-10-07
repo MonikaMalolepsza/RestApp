@@ -4,7 +4,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Web;
 
-namespace RestAnwendung.Controllers
+namespace RestApp
 {
     public class BackendController
     {

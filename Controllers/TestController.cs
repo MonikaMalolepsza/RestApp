@@ -1,5 +1,4 @@
 ﻿using Newtonsoft.Json;
-using RestAnwendung.Controllers;
 using RestApp.Models;
 using System;
 using System.Collections.Generic;
@@ -12,7 +11,7 @@ namespace RestApp.Controllers
 {
     public class TestController : ApiController
     {
-        private BackendController bc = new BackendController();
+        private BackendController bc = Global.ControllerB;
 
         // GET: api/Test
         public List<TestModelClass> Get()
@@ -35,7 +34,7 @@ namespace RestApp.Controllers
                 return BadRequest("Invalid data.");
             TestModelClass tmc = JsonConvert.DeserializeObject<TestModelClass>(value);
             bc.DataList.Add(tmc);
-            return Ok();
+            return Ok("Success");
         }
 
         // PUT: api/Test/5
@@ -52,7 +51,7 @@ namespace RestApp.Controllers
             {
                 bc.DataList.Add(tmc);
             }
-            return Ok();
+            return Ok("Success");
         }
 
         // DELETE: api/Test/5
@@ -61,7 +60,7 @@ namespace RestApp.Controllers
             if (bc.DataList.Exists(x => x.Id == id))
             {
                 bc.DataList.RemoveAll(x => x.Id == id);
-                return Ok();
+                return Ok("Success");
             }
             else
             {
